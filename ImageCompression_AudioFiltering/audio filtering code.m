@@ -1,0 +1,17 @@
+[x,fs]=audioread("audio.wav");
+ N=length(x);
+ k=0:N-1;
+ X=fft(x,N);
+ plot(k,abs(X));
+ f=(0:N-1)*fs/N;
+ plot(f,abs(X)/N);
+ f=(-N/2:N/2-1)*fs/N;
+ plot(f,abs(fftshift(X))/N);
+ Filtered=filter(Hd,x);
+ sound(Filtered,fs);
+ audiowrite("Filtered.wav",Filtered,fs);
+ plot(f,abs(fftshift(fft(Filtered))));
+ freqz(Hd)
+ impz(Hd)
+ Filtered_2=resample(Filtered,fs/2,fs);
+ plot(f,abs(fftshift(fft(Filtered_2,N))));
